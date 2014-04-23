@@ -7,7 +7,6 @@ function Carroussel (deviceState, ulElement, controlsHolder){
 	this.deviceState 	 = deviceState || APP.getCurrentDevice().deviceValue;
 	this.carrouselHolder = $(ulElement);
 	this.carrousselItems = this.carrouselHolder.find('li.item-carrousell');
-	this.amountElements  = this.carrousselItems.length;
 	this.itemsProStep	 = 4;
 	this.controlsHolder  = $(controlsHolder);
 	this.controls		 = [];
