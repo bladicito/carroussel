@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title></title>
+	<link href="css/css.css" rel="stylesheet">
+</head>
+<body>
+	<div id="container" style="width:100%">
+		<ul id="carrousell">
+			<li class="item-carrousell">
+				<div>
+					<img src="http://lorempixel.com/980/545/"/>
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://placehold.it/980x545">
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://placekitten.com/g/980/545"/>
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://placepuppy.it/980/545"/>
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://lorempixel.com/980/545/"/>
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://lorempixel.com/980/545/"/>
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://lorempixel.com/980/545/"/>
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://lorempixel.com/980/545/"/>
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://lorempixel.com/980/545/"/>
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://lorempixel.com/980/545/"/>
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://lorempixel.com/980/545/"/>
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://lorempixel.com/980/545/"/>
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://lorempixel.com/980/545/"/>
+				</div>
+			</li>
+			<li class="item-carrousell">
+				<div>
+					<img src="http://lorempixel.com/980/545/"/>
+				</div>
+			</li>
+		</ul>
+		<div id="controls"></div>
+	</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+<script src="js/app.js" type="text/javascript"></script>
+<script src="js/carrousell.js" type="text/javascript"></script>
+<script>
+	var APP 			= new App();
+	var currentDevice 	= currentState = APP.getCurrentDevice().deviceValue;
+	var carrousel 		= new Carroussel(currentDevice,'#carrousell', '#controls');
+
+	$(document).ready(function(){
+
+		carrousel.init(currentDevice);
+
+		$(window).resize(function(){
+			var controlledDevice = APP.getCurrentDevice().deviceValue;
+
+
+			if (currentDevice != controlledDevice){
+				currentDevice = controlledDevice;
+				carrousel.updateCarrousell(controlledDevice);
+			}
+
+		});
+	});
+
+</script>
+</body>
+</html>
