@@ -11,7 +11,7 @@ function Carroussel (deviceState, ulElement, controlsHolder){
 	this.controlsHolder  = $(controlsHolder);
 	this.controls		 = [];
 	this.margins		 = this.itemsProStep - 1;
-	this.marginSize		 = '5%';
+	this.marginSize		 = '4%';
 
 	this.init = function(newDevice){
 		this.updateSliderData(newDevice);
@@ -80,29 +80,27 @@ function Carroussel (deviceState, ulElement, controlsHolder){
 		var sizeForSlides = Math.floor((100 - (self.margins * parseInt(self.marginSize), 10)) / self.itemsProStep );
 
 		this.carrousselItems.each(function(index, element){
-			$(element).css('width', sizeForSlides+'%');
-			$(element).css('height', 'auto');
-			$(element).css('backgroundColor', APP.getRandomColor());
-			$(element).css('margin-right',  ((index +1) % self.itemsProStep  == 0) ? 0 : self.marginSize);
-
-
-			if (index < self.itemsProStep){
-				$(element).show();
-			} else {
-				$(element).hide();
-			}
-
+			$(element).css({
+				'width' 		 : sizeForSlides+'%',
+				'height'		 : 'auto',
+				'backgroundColor': APP.getRandomColor,
+				'margin-right'	 :  ((index +1) % self.itemsProStep)  == 0 ? 0 : self.marginSize
+			});
+			index < self.itemsProStep ? $(element).show() : $(element).hide();
 		});
 	};
 
 	this.updateSlides = function($element){
 		var sizeForSlides = Math.floor((100 - (self.margins * parseInt(self.marginSize), 10))  / self.itemsProStep );
-
+		console.log(self.margins);
+		console.log(parseInt(self.marginSize));
+		console.log(self.itemsProStep);
 		this.carrousselItems.each(function(index, element){
-			$(element).css('width', sizeForSlides+'%');
-			$(element).css('height', 'auto');
-			$(element).css('margin-right',  ((index +1) % self.itemsProStep  == 0) ? 0 : self.marginSize);
-
+			$(element).css({
+				'width' 		: sizeForSlides+'%',
+				'height'		: 'auto',
+				'margin-right'	:  ((index +1) % self.itemsProStep)  == 0 ? 0 : self.marginSize
+			});
 		});
 
 		$(self.controls).each(function(index, item){
@@ -126,11 +124,6 @@ function Carroussel (deviceState, ulElement, controlsHolder){
 
 
 	};
-
-
-	$(document).ready(function(){
-		self.init();
-	});
 
 
 }
