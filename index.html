@@ -96,8 +96,6 @@
 
 		$(window).resize(function(){
 			var controlledDevice = APP.getCurrentDevice().deviceValue;
-
-
 			if (currentDevice != controlledDevice){
 				currentDevice = controlledDevice;
 				carrousel.updateCarrousell(controlledDevice);
