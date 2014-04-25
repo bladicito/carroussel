@@ -2,51 +2,57 @@
  * Created by bardiles on 22.04.14.
  */
 
-function Carroussel (deviceState, ulElement, controlsHolder){
+function Carroussel (options){
+
 	var self 			 = this;
-	this.deviceState 	 = deviceState;
-	this.carrouselHolder = $(ulElement);
+	this.options		 = options;
+	this.deviceState 	 = this.options.deviceState;
+	this.carrouselHolder = $(this.options.itemsHolder);
+	this.controlsHolder  = $(this.options.controlsHolder);
 	this.carrousselItems = this.carrouselHolder.find('li.item-carrousell');
-	this.itemsProStep	 = 4;
-	this.controlsHolder  = $(controlsHolder);
-	this.controls		 = [];
+	this.itemsProStep	 = this.options.amountItemsLg;
+
+
+	this.marginSize		 = this.options.marginSize;
 	this.margins		 = this.itemsProStep - 1;
-	this.marginSize		 = '4%';
+	this.controls		 = [];
+
 
 	this.init = function(newDevice){
+		this.deviceState = newDevice
 		this.updateSliderData(newDevice);
 		this.createSlides();
 		this.createControls();
 	};
 
 	this.updateSliderData = function(device){
-
 		switch (device){
 			case 1:
-				self.itemsProStep =  4;
+				self.itemsProStep =  self.options.amountItemsLg;
 				break;
 			case 2:
-				self.itemsProStep =  3;
+				self.itemsProStep =  self.options.amountItemsMd;
 				break;
 			case 3:
-				self.itemsProStep =  2;
+				self.itemsProStep =  self.options.amountItemsSm;
 				break;
 			case 4:
-				self.itemsProStep =  1;
+				self.itemsProStep =  self.options.amountItemsXs;
 				break;
 		}
-
-		self.margins = this.itemsProStep - 1;
+		this.deviceState = device;
+		self.margins 	 = this.itemsProStep - 1;
 	};
 
 	this.updateCarrousell = function(device){
-
-		this.init(device);
+		this.deviceState 	= device
+		this.updateSliderData(device);
+		this.createSlides();
+		this.createControls();
 	};
 
 	this.createControls = function(){
-
-		self.controlsHolder.empty();
+		this.controlsHolder.empty();
 		this.controls = [];
 
 		this.carrousselItems.each(function(index, element){
@@ -77,29 +83,28 @@ function Carroussel (deviceState, ulElement, controlsHolder){
 
 
 	this.createSlides = function(){
-		var sizeForSlides = Math.floor((100 - (self.margins * parseInt(self.marginSize), 10)) / self.itemsProStep );
-
+		var sizeForSlides = (100 - (self.margins * self.marginSize)) /  self.itemsProStep;
 		this.carrousselItems.each(function(index, element){
 			$(element).css({
 				'width' 		 : sizeForSlides+'%',
 				'height'		 : 'auto',
-				'backgroundColor': APP.getRandomColor,
-				'margin-right'	 :  ((index +1) % self.itemsProStep)  == 0 ? 0 : self.marginSize
+				'backgroundColor': '#f2f2f2',
+				'margin-right'	 :  ((index +1) % self.itemsProStep)  == 0 ? 0 : self.marginSize + '%'
 			});
 			index < self.itemsProStep ? $(element).show() : $(element).hide();
 		});
 	};
 
 	this.updateSlides = function($element){
-		var sizeForSlides = Math.floor((100 - (self.margins * parseInt(self.marginSize), 10))  / self.itemsProStep );
-		console.log(self.margins);
-		console.log(parseInt(self.marginSize));
-		console.log(self.itemsProStep);
+		var from 		  = parseInt($element.attr('data-slide') ,10);
+		var to   		  = (from + self.itemsProStep) - 1;
+		var sizeForSlides = (100 - (self.margins * self.marginSize)) /  self.itemsProStep;
+
 		this.carrousselItems.each(function(index, element){
 			$(element).css({
 				'width' 		: sizeForSlides+'%',
 				'height'		: 'auto',
-				'margin-right'	:  ((index +1) % self.itemsProStep)  == 0 ? 0 : self.marginSize
+				'margin-right'	:  ((index +1) % self.itemsProStep)  == 0 ? 0 : self.marginSize  + '%'
 			});
 		});
 
@@ -109,21 +114,12 @@ function Carroussel (deviceState, ulElement, controlsHolder){
 
 		$element.css({'background-color': 'blue'});
 
-		var from = parseInt($element.attr('data-slide') ,10);
-		var to   = (from + self.itemsProStep) - 1;
-
-
 		self.carrousselItems.each(function(index, item){
 			if (index >= from && index <= to) {
 				$(item).show();
-
 			} else {
 				$(item).hide();
 			}
 		});
-
-
 	};
-
-
 }

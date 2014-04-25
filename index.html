@@ -79,6 +79,7 @@
 				</div>
 			</li>
 		</ul>
+		dsfdfsdf
 		<div id="controls"></div>
 	</div>
 
@@ -88,7 +89,19 @@
 <script>
 	var APP 			= new App();
 	var currentDevice 	= currentState = APP.getCurrentDevice().deviceValue;
-	var carrousel 		= new Carroussel(currentDevice,'#carrousell', '#controls');
+
+	var options = {
+		itemsHolder : '#carrousell',
+		controlsHolder: '#controls',
+		currentDevice: currentDevice,
+		amountItemsLg: 4,
+		amountItemsMd: 3,
+		amountItemsSm: 2,
+		amountItemsXs: 1,
+		marginSize: '3'
+	}
+
+	var carrousel 		= new Carroussel(options);
 
 	$(document).ready(function(){
 
