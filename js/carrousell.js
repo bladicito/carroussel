@@ -12,11 +12,9 @@ function Carroussel (options){
 	this.carrousselItems = this.carrouselHolder.find('li.item-carrousell');
 	this.itemsProStep	 = this.options.amountItemsLg;
 
-
 	this.marginSize		 = this.options.marginSize;
 	this.margins		 = this.itemsProStep - 1;
 	this.controls		 = [];
-
 
 	this.init = function(newDevice){
 		this.deviceState = newDevice
@@ -41,7 +39,7 @@ function Carroussel (options){
 				break;
 		}
 		this.deviceState = device;
-		self.margins 	 = this.itemsProStep - 1;
+		this.margins 	 = this.itemsProStep - 1;
 	};
 
 	this.updateCarrousell = function(device){
@@ -96,9 +94,9 @@ function Carroussel (options){
 	};
 
 	this.updateSlides = function($element){
-		var from 		  = parseInt($element.attr('data-slide') ,10);
-		var to   		  = (from + self.itemsProStep) - 1;
-		var sizeForSlides = (100 - (self.margins * self.marginSize)) /  self.itemsProStep;
+		var from 		  = parseInt($element.attr('data-slide') ,10),
+			to   		  = (from + self.itemsProStep) - 1,
+			sizeForSlides = (100 - (self.margins * self.marginSize)) /  self.itemsProStep;
 
 		this.carrousselItems.each(function(index, element){
 			$(element).css({
